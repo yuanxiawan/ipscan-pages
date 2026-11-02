@@ -1,0 +1,2 @@
+# 占位文件:让 git 跟踪 output/ 目录。
+# scan.yml / speed-test.yml 运行后会生成 ips.txt / scan_result.json / speed.json 并自动 commit。
