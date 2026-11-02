@@ -1,0 +1,21 @@
+{
+  "updated_at": "2026-11-02T07:01:05Z",
+  "source": "github-actions",
+  "count": 2,
+  "top": [
+    {
+      "ip": "104.16.1.1",
+      "colo": "SJC",
+      "loc": "US",
+      "delay_ms": 15.1,
+      "score": 70.11
+    },
+    {
+      "ip": "104.18.1.1",
+      "colo": "SJC",
+      "loc": "US",
+      "delay_ms": 27.5,
+      "score": 57.21
+    }
+  ]
+}
