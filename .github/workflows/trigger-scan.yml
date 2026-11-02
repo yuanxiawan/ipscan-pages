@@ -1,9 +1,8 @@
-name: trigger-private-scan
+name: refresh-data
 
 on:
   schedule:
-    # 每 30 分钟触发私有仓库的扫描。
-    # 刻意错开 :00/:30（GitHub cron 拥堵槽位）与本机计划任务的 :21/:51。
+    # 每 30 分钟触发一次上游数据刷新（错开 :00/:30 拥堵槽位与本机任务 :21/:51）
     - cron: "27,57 * * * *"
   workflow_dispatch:
 
@@ -14,23 +13,23 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - name: Dispatch scan.yml in private repo
+      - name: Trigger upstream refresh
         env:
           TOKEN: ${{ secrets.DISPATCH_TOKEN }}
+          URL: ${{ secrets.DISPATCH_URL }}
         run: |
-          if [ -z "$TOKEN" ]; then
-            echo "DISPATCH_TOKEN 未配置：请在 ipscan-pages 的 Secrets 中添加（细粒度 PAT，含 ipscan 仓库的 Actions 读写权限）"
+          if [ -z "$TOKEN" ] || [ -z "$URL" ]; then
+            echo "缺少 DISPATCH_TOKEN / DISPATCH_URL 配置（仓库 Secrets）"
             exit 1
           fi
           code=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" -X POST \
             -H "Authorization: Bearer $TOKEN" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            https://api.github.com/repos/yuanxiawan/ipscan/actions/workflows/scan.yml/dispatches \
-            -d '{"ref":"main"}')
+            "$URL" -d '{"ref":"main"}')
           echo "HTTP $code"
           if [ "$code" = "204" ]; then
-            echo "已触发私有仓库扫描"
+            echo "刷新已触发"
           else
             cat /tmp/resp.txt
             exit 1
