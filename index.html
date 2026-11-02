@@ -36,10 +36,11 @@
   .copy{border:1px solid var(--line);background:transparent;color:var(--accent);border-radius:6px;
     padding:2px 8px;cursor:pointer;font-size:12px}
   .copy:hover{background:var(--panel2)}
-  .row-actions{display:flex;gap:6px}
-  input{background:var(--panel2);border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:8px;width:100%}
+  .row-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  input,select{background:var(--panel2);border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:8px;width:100%}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:720px){.grid,.grid3{grid-template-columns:1fr}}
   .vless-box{background:var(--panel2);border:1px dashed var(--line);border-radius:10px;padding:12px;margin-top:10px}
   .vless-out{font-family:ui-monospace,monospace;word-break:break-all;background:var(--bg);
     border:1px solid var(--line);border-radius:8px;padding:10px;font-size:12px;margin-top:8px}
@@ -55,6 +56,11 @@
   .tabs button{border:1px solid var(--line);background:var(--panel);color:var(--muted);
     border-radius:8px;padding:6px 12px;cursor:pointer}
   .tabs button.active{color:var(--fg);border-color:var(--accent)}
+  .note{background:var(--panel2);border-left:3px solid var(--warn);border-radius:8px;
+    padding:10px;font-size:12px;color:var(--muted);margin-top:10px}
+  .err{color:var(--bad);font-size:12px;margin-top:6px}
+  .ck{display:flex;gap:6px;align-items:center;font-size:13px}
+  .ck input{width:auto}
 </style>
 </head>
 <body>
@@ -67,35 +73,107 @@
     <button class="btn" id="refresh"><span class="spin" style="display:none" id="spin"></span> 刷新</button>
   </header>
 
-  <!-- 生成 vless 链接（UUID 来自你的客户端，不存仓库） -->
   <div class="card">
     <h2>生成订阅链接</h2>
-    <div class="hint">选一个 IP，填入你自己的 UUID（存于 GitHub Secrets，不公开），生成 vless:// 链接用于客户端导入。</div>
-    <div class="grid" style="margin-top:10px">
+    <div class="hint">全部在你的浏览器本地完成：IP 来自本页扫描数据，UUID / SNI 等参数由你自行填写（须与你自己的服务器/Worker 配置一致）。
+      生成的链接不会上传到任何服务器或仓库。</div>
+    <div class="grid3" style="margin-top:10px">
       <div>
-        <label class="f">IP</label>
-        <select id="pick" style="width:100%;padding:8px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);color:var(--fg)"></select>
+        <label class="f">IP（Top 榜选择，可手动覆盖）</label>
+        <input id="ip" list="iplist" placeholder="104.16.0.1">
+        <datalist id="iplist"></datalist>
       </div>
       <div>
-        <label class="f">UUID（必填，仅本地使用）</label>
-        <input id="uuid" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
+        <label class="f">UUID（必填，你服务器的凭据）</label>
+        <input id="uuid" class="mono" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
       </div>
       <div>
-        <label class="f">SNI</label>
-        <input id="sni" placeholder="visa.cn">
+        <label class="f">SNI / 域名</label>
+        <input id="sni" placeholder="your-domain.com">
       </div>
       <div>
-        <label class="f">Path</label>
-        <input id="path" value="/">
+        <label class="f">端口</label>
+        <input id="port" list="ports" value="443">
+        <datalist id="ports">
+          <option value="443"><option value="8443"><option value="2053"><option value="2083">
+          <option value="2096"><option value="80"><option value="8080"><option value="8880"><option value="4443">
+        </datalist>
+      </div>
+      <div>
+        <label class="f">传输协议</label>
+        <select id="transport">
+          <option value="tls-tcp">TCP + TLS</option>
+          <option value="tls-ws">WebSocket + TLS</option>
+          <option value="tls-grpc">gRPC + TLS</option>
+          <option value="plain-tcp">TCP（明文）</option>
+        </select>
+      </div>
+      <div id="flowwrap">
+        <label class="f">Flow（XTLS，仅 TCP+TLS）</label>
+        <select id="flow">
+          <option value="">无</option>
+          <option value="xtls-rprx-vision">xtls-rprx-vision</option>
+        </select>
+      </div>
+      <div id="pathwrap" style="display:none">
+        <label class="f">WS Path</label>
+        <input id="wspath" value="/">
+      </div>
+      <div id="grpcwrap" style="display:none">
+        <label class="f">gRPC serviceName</label>
+        <input id="grpcname" value="grpc">
+      </div>
+      <div>
+        <label class="f">备注（链接 #tag，可选）</label>
+        <input id="tag" placeholder="my-node">
       </div>
     </div>
-    <div class="vless-box">
-      <div id="vlessout" class="vless-out mono" style="display:none"></div>
-      <div class="row-actions" style="margin-top:8px">
-        <button class="copy" id="build">生成链接</button>
-        <button class="copy" id="copy" style="display:none">复制</button>
+    <div class="row-actions" style="margin-top:10px">
+      <button class="copy" id="gen">生成单条链接</button>
+      <button class="copy" id="genbatch">生成批量订阅（Base64）</button>
+    </div>
+    <div id="genmsg" class="hint" style="margin-top:6px"></div>
+    <div id="vlessout" class="vless-out mono" style="display:none"></div>
+    <div id="batchout" class="vless-out mono" style="display:none"></div>
+    <div class="row-actions" style="margin-top:8px">
+      <button class="copy" id="copy1" style="display:none">复制单条链接</button>
+      <button class="copy" id="copy2" style="display:none">复制订阅串</button>
+    </div>
+    <div class="note">⚠️ 批量订阅串（Base64）内含明文 UUID，它本身就是你的凭据——请勿公开发布；单条 vless:// 链接同理。</div>
+  </div>
+
+  <div class="card">
+    <h2>加密档案 <span class="hint">（本地保存 / 换设备迁移，可选）</span></h2>
+    <div class="hint">档案 = 当前表单参数 + 批量链接，用 AES-256-GCM 加密（PBKDF2 60 万轮）。
+      明文只在你浏览器内存中出现，密文存本机 localStorage 或 .vlessbox 文件，任何服务器都接触不到。</div>
+    <div id="restorebox" style="display:none">
+      <label class="f">检测到本机加密档案，输入口令解密恢复</label>
+      <div class="row-actions">
+        <input id="unpw" type="password" placeholder="档案口令" style="flex:1;min-width:160px">
+        <button class="copy" id="undec">解密恢复</button>
+      </div>
+      <div id="unerr" class="err" style="display:none">口令错误或档案损坏</div>
+    </div>
+    <div class="grid3" style="margin-top:10px">
+      <div>
+        <label class="f">口令（≥8 位）</label>
+        <input id="pw" type="password" placeholder="≥8 位">
+      </div>
+      <div>
+        <label class="f">&nbsp;</label>
+        <label class="ck"><input type="checkbox" id="remember"> 记住口令（本浏览器免输，安全性略降）</label>
+      </div>
+      <div>
+        <label class="f">.vlessbox 文件（换设备迁移用）</label>
+        <input id="fbox" type="file" accept=".vlessbox,.json,application/json">
       </div>
     </div>
+    <div class="row-actions" style="margin-top:10px">
+      <button class="copy" id="encsave">加密保存到本浏览器</button>
+      <button class="copy" id="encdl">下载 .vlessbox</button>
+      <button class="copy" id="encimp">导入文件并解密</button>
+    </div>
+    <div id="encmsg" class="hint" style="margin-top:8px"></div>
   </div>
 
   <div class="tabs">
@@ -114,7 +192,8 @@
   </div>
 
   <p class="hint" style="margin-top:16px">
-    本页由 GitHub Actions 自动更新，数据来自本仓库 <code>output/</code>。
+    本页为纯静态站点（GitHub Pages），无后端：你填写的一切只在浏览器本地处理，不会上传。
+    数据由 GitHub Actions 自动更新，来自仓库 <code>output/</code>。
     测速需在已挂 self-hosted runner 的环境运行（<code>speed-test.yml</code>）。
   </p>
 </div>
@@ -122,6 +201,10 @@
 <script>
 const $ = s => document.querySelector(s);
 const state = { top: [], speed: [], meta: {} };
+const LS_ARCHIVE = "vlessbox.archive";
+const LS_PASS = "vlessbox.pass";
+const KDF_ITER = 600000;
+const UUID_RE = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
 
 function fmtTime(s){ if(!s) return "—"; const d=new Date(s); return d.toLocaleString("zh-CN",{hour12:false}); }
 
@@ -135,7 +218,7 @@ async function load(){
     state.top = scan.top||[];
     state.speed = (speed&&speed.results)||[];
     state.meta = scan;
-    renderMeta(); renderScan(); renderSpeed(); renderPick();
+    renderMeta(); renderScan(); renderSpeed(); renderIplist();
   }finally{ $("#spin").style.display="none"; }
 }
 
@@ -144,9 +227,7 @@ function renderMeta(){
     `共 ${state.top.length} 个 · 更新 ${fmtTime(state.meta.updated_at)} · 源 ${state.meta.source||"?"}`;
 }
 
-function copy(text){
-  navigator.clipboard?.writeText(text).catch(()=>{});
-}
+function copy(text){ navigator.clipboard?.writeText(text).catch(()=>{}); }
 
 function renderScan(){
   const el = $("#scantbody");
@@ -183,28 +264,233 @@ function renderSpeed(){
   el.innerHTML = h;
 }
 
-function renderPick(){
-  const sel = $("#pick");
-  sel.innerHTML = state.top.map((r,i)=>`<option value="${i}">${r.ip} · ${r.colo||"?"} ${r.loc||"?"} · ${r.delay_ms}ms · ${r.score}</option>`).join("");
+function renderIplist(){
+  $("#iplist").innerHTML = state.top.map(r=>
+    `<option value="${r.ip}">${r.colo||"?"} ${r.loc||"?"} · ${r.delay_ms}ms · ${r.score}</option>`).join("");
+  if(state.top.length && !$("#ip").value) $("#ip").value = state.top[0].ip;
 }
 
-function buildVless(){
-  const i = parseInt($("#pick").value||"0",10);
-  const r = state.top[i];
-  const uuid = $("#uuid").value.trim();
-  const sni = $("#sni").value.trim() || "visa.cn";
-  const path = $("#path").value.trim() || "/";
-  if(!r || !uuid){ alert("请选择 IP 并填入 UUID"); return; }
-  const b64 = btoa(uuid.replace(/-/g,""));
-  const url = `vless://${uuid}@${r.ip}:443?` +
-    `security=tls&type=tls&sni=${sni}&path=${encodeURIComponent(path)}&type=tcp&alpn=h2,http/1.1` +
-    `#${encodeURIComponent((r.colo||"?")+" "+(r.loc||"?"))}`;
-  const out = $("#vlessout"); out.style.display="block"; out.textContent = url;
-  $("#copy").style.display="inline-block";
+/* ---------- 表单 / 校验 / 链接构造 ---------- */
+
+function readCfg(){
+  return {
+    ip: ($("#ip").value||"").trim(),
+    uuid: ($("#uuid").value||"").trim(),
+    sni: ($("#sni").value||"").trim(),
+    port: ($("#port").value||"443").trim(),
+    transport: $("#transport").value,
+    flow: $("#flow").value,
+    wsPath: ($("#wspath").value||"/").trim(),
+    grpcName: ($("#grpcname").value||"grpc").trim(),
+    tag: ($("#tag").value||"").trim(),
+  };
 }
 
-$("#build").onclick = buildVless;
-$("#copy").onclick = ()=>{ navigator.clipboard?.writeText($("#vlessout").textContent); };
+function validateCfg(c){
+  if(!c.ip) return "请填写 IP（从 Top 榜选择或手动输入）";
+  if(!UUID_RE.test(c.uuid)) return "UUID 格式不正确（36 位，形如 xxxxxxxx-xxxx-…），请核对你服务器上的 UUID";
+  const port = parseInt(c.port, 10);
+  if(!port || port < 1 || port > 65535) return "端口必须是 1-65535 的数字";
+  if(c.transport !== "plain-tcp" && !c.sni) return "TLS / gRPC 模式需要填写 SNI 域名";
+  return null;
+}
+
+function syncFields(){
+  const t = $("#transport").value;
+  $("#flowwrap").style.display = t === "tls-tcp" ? "" : "none";
+  $("#pathwrap").style.display = t === "tls-ws" ? "" : "none";
+  $("#grpcwrap").style.display = t === "tls-grpc" ? "" : "none";
+}
+
+function buildVless(c, ipOverride){
+  const ip = ipOverride || c.ip;
+  const q = [];
+  if(c.transport === "tls-tcp"){
+    q.push("security=tls", "type=tcp");
+    if(c.sni) q.push("sni=" + encodeURIComponent(c.sni));
+    q.push("alpn=h2,http/1.1");
+    if(c.flow) q.push("flow=" + c.flow);
+  } else if(c.transport === "tls-ws"){
+    q.push("security=tls", "type=ws");
+    if(c.sni) q.push("sni=" + encodeURIComponent(c.sni));
+    q.push("path=" + encodeURIComponent(c.wsPath || "/"));
+  } else if(c.transport === "tls-grpc"){
+    q.push("security=tls", "type=grpc");
+    if(c.sni) q.push("sni=" + encodeURIComponent(c.sni));
+    q.push("serviceName=" + encodeURIComponent(c.grpcName || "grpc"));
+  } else {
+    q.push("security=none", "type=tcp");
+  }
+  const tag = c.tag || ip;
+  return `vless://${c.uuid}@${ip}:${c.port}?` + q.join("&") + "#" + encodeURIComponent(tag);
+}
+
+function genMsg(text, ok){
+  const el = $("#genmsg");
+  el.textContent = text;
+  el.style.color = ok ? "var(--good)" : "var(--bad)";
+}
+
+function genSingle(){
+  const c = readCfg();
+  const err = validateCfg(c);
+  if(err){ genMsg(err, false); return; }
+  const out = $("#vlessout");
+  out.style.display = "block"; out.textContent = buildVless(c);
+  $("#copy1").style.display = "inline-block";
+  genMsg("已生成单条链接", true);
+}
+
+function genBatch(){
+  const c = readCfg();
+  const err = validateCfg(c);
+  if(err){ genMsg(err, false); return; }
+  if(!state.top.length){ genMsg("暂无扫描结果，无法批量生成（可先手动生成单条）", false); return; }
+  const lines = state.top.map(r => buildVless(c, r.ip));
+  const out = $("#batchout");
+  out.style.display = "block"; out.textContent = btoa(lines.join("\n"));
+  $("#copy2").style.display = "inline-block";
+  genMsg(`已生成 ${lines.length} 条链接的 Base64 订阅串`, true);
+}
+
+/* ---------- 加密档案（Web Crypto：PBKDF2 + AES-GCM） ---------- */
+
+function b64e(u8){ let s=""; for(let i=0;i<u8.length;i+=0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i+0x8000)); return btoa(s); }
+function b64d(s){ const b = atob(s); const u8 = new Uint8Array(b.length); for(let i=0;i<b.length;i++) u8[i] = b.charCodeAt(i); return u8; }
+
+async function deriveKey(pass, salt){
+  const km = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+  return crypto.subtle.deriveKey(
+    { name:"PBKDF2", salt, iterations:KDF_ITER, hash:"SHA-256" },
+    km, { name:"AES-GCM", length:256 }, false, ["encrypt","decrypt"]
+  );
+}
+
+function archivePayload(){
+  const c = readCfg();
+  const err = validateCfg(c);
+  if(err) throw new Error(err);
+  const links = state.top.length ? state.top.map(r => buildVless(c, r.ip)) : [buildVless(c)];
+  return { savedAt: new Date().toISOString(), cfg: c, links };
+}
+
+async function encryptArchive(pass){
+  const payload = archivePayload();
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const key = await deriveKey(pass, salt);
+  const ct = await crypto.subtle.encrypt({ name:"AES-GCM", iv }, key, new TextEncoder().encode(JSON.stringify(payload)));
+  return { v:1, kdf:"pbkdf2-sha256", iter:KDF_ITER, cipher:"aes-gcm-256", salt:b64e(salt), iv:b64e(iv), ct:b64e(new Uint8Array(ct)) };
+}
+
+async function decryptArchive(blob, pass){
+  if(!blob || blob.v !== 1) throw new Error("档案版本不兼容");
+  const key = await deriveKey(pass, b64d(blob.salt));
+  const pt = await crypto.subtle.decrypt({ name:"AES-GCM", iv:b64d(blob.iv) }, key, b64d(blob.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+
+function applyPayload(p){
+  const c = p.cfg || {};
+  $("#ip").value = c.ip || "";
+  $("#uuid").value = c.uuid || "";
+  $("#sni").value = c.sni || "";
+  $("#port").value = c.port || "443";
+  $("#transport").value = c.transport || "tls-tcp";
+  $("#flow").value = c.flow || "";
+  $("#wspath").value = c.wsPath || "/";
+  $("#grpcname").value = c.grpcName || "grpc";
+  $("#tag").value = c.tag || "";
+  syncFields();
+  if(p.links && p.links.length){
+    const out = $("#batchout");
+    out.style.display = "block";
+    out.textContent = btoa(p.links.join("\n"));
+    $("#copy2").style.display = "inline-block";
+  }
+}
+
+function encMsg(text, ok){
+  const el = $("#encmsg");
+  el.textContent = text;
+  el.style.color = ok ? "var(--good)" : "var(--bad)";
+}
+
+async function saveLocal(){
+  const pass = $("#pw").value;
+  if(pass.length < 8){ encMsg("口令至少 8 位", false); return; }
+  try{
+    const blob = await encryptArchive(pass);
+    localStorage.setItem(LS_ARCHIVE, JSON.stringify(blob));
+    if($("#remember").checked) localStorage.setItem(LS_PASS, pass);
+    else localStorage.removeItem(LS_PASS);
+    encMsg("已加密保存到本浏览器（口令" + ($("#remember").checked ? "已记住" : "未保存") + "）", true);
+    checkRestore();
+  }catch(e){ encMsg("保存失败：" + e.message, false); }
+}
+
+function downloadArchive(){
+  const pass = $("#pw").value;
+  if(pass.length < 8){ encMsg("口令至少 8 位", false); return; }
+  encryptArchive(pass).then(blob => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(blob)], { type:"application/json" }));
+    a.download = "vlessbox-" + new Date().toISOString().slice(0,10) + ".vlessbox";
+    a.click();
+    URL.revokeObjectURL(a.href);
+    encMsg("已下载加密档案文件（含口令加密，可迁移到其它设备导入）", true);
+  }).catch(e => encMsg("失败：" + e.message, false));
+}
+
+async function importFile(){
+  const f = $("#fbox").files[0];
+  if(!f){ encMsg("请先选择 .vlessbox 文件", false); return; }
+  const pass = $("#pw").value;
+  try{
+    const raw = await f.text();
+    const payload = await decryptArchive(JSON.parse(raw), pass);
+    applyPayload(payload);
+    localStorage.setItem(LS_ARCHIVE, raw);
+    if($("#remember").checked) localStorage.setItem(LS_PASS, pass);
+    encMsg("导入成功：表单与订阅串已恢复，档案已存入本浏览器", true);
+    checkRestore();
+  }catch(e){ encMsg("解密失败：口令错误或文件损坏", false); }
+}
+
+async function restoreLocal(){
+  const raw = localStorage.getItem(LS_ARCHIVE);
+  if(!raw) return;
+  const pass = $("#unpw").value || "";
+  try{
+    applyPayload(await decryptArchive(JSON.parse(raw), pass));
+    $("#unerr").style.display = "none";
+    encMsg("档案已恢复", true);
+  }catch(e){ $("#unerr").style.display = ""; }
+}
+
+function checkRestore(){
+  const raw = localStorage.getItem(LS_ARCHIVE);
+  if(raw){
+    $("#restorebox").style.display = "";
+    const savedPass = localStorage.getItem(LS_PASS);
+    if(savedPass){ $("#unpw").value = savedPass; restoreLocal(); }
+  } else {
+    $("#restorebox").style.display = "none";
+  }
+}
+
+/* ---------- 事件绑定 ---------- */
+
+$("#gen").onclick = genSingle;
+$("#genbatch").onclick = genBatch;
+$("#copy1").onclick = ()=>copy($("#vlessout").textContent);
+$("#copy2").onclick = ()=>copy($("#batchout").textContent);
+$("#transport").onchange = syncFields;
+$("#encsave").onclick = saveLocal;
+$("#encdl").onclick = downloadArchive;
+$("#encimp").onclick = importFile;
+$("#undec").onclick = restoreLocal;
+$("#unpw").onkeydown = e => { if(e.key === "Enter") restoreLocal(); };
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
   document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("active"));
   b.classList.add("active");
@@ -213,9 +499,15 @@ document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
   $("#tab-speed").style.display = t==="speed"?"":"none";
 });
 $("#refresh").onclick = load;
-// SNI 从 scan_result.json 元数据里带不回来（避免泄露），这里默认值让用户自己填
+
+if(!(window.crypto && crypto.subtle)){
+  ["#encsave","#encdl","#encimp"].forEach(s=>{ $(s).disabled = true; $(s).style.opacity = .5; });
+  encMsg("当前环境不支持 Web Crypto（需 HTTPS），加密档案功能不可用", false);
+}
+
+syncFields();
+checkRestore();
 load();
-setInterval(()=>{ /* 可选自动刷新 */ }, 30*60*1000);
 </script>
 </body>
 </html>
