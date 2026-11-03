@@ -48,7 +48,7 @@ Cloudflare Anycast IP 自动优选 + VLESS 订阅链接生成器。
 
 | 文件 | 内容 | 更新频率 |
 |---|---|---|
-| `output/scan_result.json` | 最新扫描结果（IP / POP / 地区 / 延迟 / 评分） | 每 30 分钟（GitHub Actions 自动） |
+| `output/scan_result.json` | 最新扫描结果（IP / POP / 地区 / 延迟 / 评分） | 每 60 分钟（GitHub Actions 自动） |
 | `output/ips.txt` | 纯文本优选 IP 列表 | 同上 |
 | `output/speed.json` | 真实出口测速结果（需 self-hosted runner） | 每小时（配置后） |
 
