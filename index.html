@@ -14,6 +14,15 @@
     :root{ --bg:#f5f6fa; --panel:#ffffff; --panel2:#f0f2f8; --fg:#1a1d24; --muted:#5b6472;
       --accent:#2f7ee5; --good:#0f9d58; --warn:#c98a00; --bad:#d83a52; --line:#e2e5ec; --chip:#e9edf5; }
   }
+  :root[data-theme="dark"]{
+    --bg:#0f1117; --panel:#171a22; --panel2:#1e2230; --fg:#e6e9ef; --muted:#9aa3b2;
+    --accent:#4c9aff; --good:#3ddc84; --warn:#f5c518; --bad:#ff5c7a; --line:#2a2f3d;
+    --chip:#2a3140;
+  }
+  :root[data-theme="light"]{
+    --bg:#f5f6fa; --panel:#ffffff; --panel2:#f0f2f8; --fg:#1a1d24; --muted:#5b6472;
+    --accent:#2f7ee5; --good:#0f9d58; --warn:#c98a00; --bad:#d83a52; --line:#e2e5ec; --chip:#e9edf5;
+  }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--fg);
     font:14px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
@@ -61,6 +70,18 @@
   .err{color:var(--bad);font-size:12px;margin-top:6px}
   .ck{display:flex;gap:6px;align-items:center;font-size:13px}
   .ck input{width:auto}
+  #freshbanner{border-radius:10px;padding:10px 14px;font-size:13px;margin-top:14px;border:1px solid var(--line)}
+  #freshbanner.fresh{background:color-mix(in srgb,var(--good) 12%,transparent);border-color:var(--good);color:var(--good)}
+  #freshbanner.stale{background:color-mix(in srgb,var(--warn) 12%,transparent);border-color:var(--warn);color:var(--warn)}
+  #freshbanner.expired{background:color-mix(in srgb,var(--bad) 12%,transparent);border-color:var(--bad);color:var(--bad)}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+  @media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:var(--panel2);border-radius:10px;padding:10px;text-align:center}
+  .stat b{display:block;font-size:18px;font-variant-numeric:tabular-nums}
+  .stat span{font-size:11px;color:var(--muted)}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  .toolbar select{width:auto;min-width:120px;padding:6px 8px;font-size:12px}
+  .tablewrap{overflow-x:auto}
 </style>
 </head>
 <body>
@@ -70,8 +91,13 @@
       <h1>GH Deploy · 优选 IP</h1>
       <div class="meta" id="meta">加载中…</div>
     </div>
-    <button class="btn" id="refresh"><span class="spin" style="display:none" id="spin"></span> 刷新</button>
+    <div class="row-actions">
+      <button class="btn" id="theme">🌓 主题</button>
+      <button class="btn" id="refresh"><span class="spin" style="display:none" id="spin"></span> 刷新</button>
+    </div>
   </header>
+
+  <div id="freshbanner" style="display:none"></div>
 
   <div class="card">
     <h2>生成订阅链接</h2>
@@ -183,12 +209,23 @@
 
   <div class="card" id="tab-scan">
     <h2>Top 扫描</h2>
-    <div id="scantbody"></div>
+    <div class="stats" id="statsbar"></div>
+    <div class="toolbar">
+      <select id="floc"><option value="">全部地区</option></select>
+      <select id="fsort">
+        <option value="score">按得分 ↓</option>
+        <option value="delay">按延迟 ↑</option>
+        <option value="delay_desc">按延迟 ↓</option>
+      </select>
+      <button class="copy" id="copyall">复制全部 IP</button>
+      <a class="copy" href="output/ips.txt" download style="text-decoration:none">下载 ips.txt</a>
+    </div>
+    <div class="tablewrap"><div id="scantbody"></div></div>
   </div>
 
   <div class="card" id="tab-speed" style="display:none">
     <h2>测速（真实出口）</h2>
-    <div id="speedbody"></div>
+    <div class="tablewrap"><div id="speedbody"></div></div>
   </div>
 
   <p class="hint" style="margin-top:16px">
@@ -200,15 +237,19 @@
 
 <script>
 const $ = s => document.querySelector(s);
-const state = { top: [], speed: [], meta: {} };
+const state = { top: [], speed: [], meta: {}, filter: { loc: "", sort: "score" }, loading: false };
 const LS_ARCHIVE = "vlessbox.archive";
 const LS_PASS = "vlessbox.pass";
+const LS_THEME = "site.theme";
 const KDF_ITER = 600000;
 const UUID_RE = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+const STALE_MIN = 60, EXPIRED_MIN = 180;
 
 function fmtTime(s){ if(!s) return "—"; const d=new Date(s); return d.toLocaleString("zh-CN",{hour12:false}); }
 
 async function load(){
+  if(state.loading) return;
+  state.loading = true;
   $("#spin").style.display="inline-block";
   try{
     const [scan, speed] = await Promise.all([
@@ -218,8 +259,8 @@ async function load(){
     state.top = scan.top||[];
     state.speed = (speed&&speed.results)||[];
     state.meta = scan;
-    renderMeta(); renderScan(); renderSpeed(); renderIplist();
-  }finally{ $("#spin").style.display="none"; }
+    renderMeta(); renderBanner(); renderStats(); renderScan(); renderSpeed(); renderIplist();
+  }finally{ $("#spin").style.display="none"; state.loading = false; }
 }
 
 function renderMeta(){
@@ -227,20 +268,79 @@ function renderMeta(){
     `共 ${state.top.length} 个 · 更新 ${fmtTime(state.meta.updated_at)} · 源 ${state.meta.source||"?"}`;
 }
 
+function renderBanner(){
+  const el = $("#freshbanner");
+  const ts = state.meta.updated_at ? new Date(state.meta.updated_at) : null;
+  if(!ts || isNaN(ts) || !state.top.length){
+    el.style.display = ""; el.className = "stale";
+    el.textContent = "⚠️ 暂无扫描数据——自动流水线可能未运行，可在私有仓库 Actions 页手动触发";
+    return;
+  }
+  const mins = Math.floor((Date.now() - ts.getTime()) / 60000);
+  el.style.display = "";
+  if(mins < STALE_MIN){
+    el.className = "fresh";
+    el.textContent = `✔ 数据新鲜（${mins} 分钟前更新）`;
+  } else if(mins < EXPIRED_MIN){
+    el.className = "stale";
+    el.textContent = `⚠ 数据已 ${mins} 分钟未更新，可能不是最新扫描结果`;
+  } else {
+    el.className = "expired";
+    el.textContent = `✖ 数据已过期 ${(mins/60).toFixed(1)} 小时——自动调度可能未运行，请手动触发扫描`;
+  }
+}
+
 function copy(text){ navigator.clipboard?.writeText(text).catch(()=>{}); }
 
+function filteredTop(){
+  let rows = state.top;
+  if(state.filter.loc) rows = rows.filter(r => (r.loc||"") === state.filter.loc);
+  const s = state.filter.sort;
+  if(s === "delay") rows = [...rows].sort((a,b)=>a.delay_ms-b.delay_ms);
+  else if(s === "delay_desc") rows = [...rows].sort((a,b)=>b.delay_ms-a.delay_ms);
+  else rows = [...rows].sort((a,b)=>b.score-a.score);
+  return rows;
+}
+
+function delayCls(ms){ return ms < 100 ? "ok" : (ms < 250 ? "warn" : "bad"); }
+
+function renderStats(){
+  const el = $("#statsbar");
+  if(!state.top.length){ el.innerHTML = ""; return; }
+  const delays = state.top.map(r=>r.delay_ms).sort((a,b)=>a-b);
+  const best = delays[0], med = delays[Math.floor(delays.length/2)];
+  const locs = new Set(state.top.map(r=>r.loc).filter(Boolean));
+  el.innerHTML = `
+    <div class="stat"><b>${state.top.length}</b><span>节点总数</span></div>
+    <div class="stat"><b class="${delayCls(best)}">${best} ms</b><span>最优延迟</span></div>
+    <div class="stat"><b>${med} ms</b><span>中位延迟</span></div>
+    <div class="stat"><b>${locs.size}</b><span>覆盖地区</span></div>`;
+}
+
+function renderToolbar(){
+  const locs = [...new Set(state.top.map(r=>r.loc).filter(Boolean))].sort();
+  const sel = $("#floc");
+  const cur = state.filter.loc;
+  sel.innerHTML = `<option value="">全部地区</option>` + locs.map(l=>`<option value="${l}">${l}</option>`).join("");
+  if(cur && locs.includes(cur)) sel.value = cur; else { sel.value = ""; state.filter.loc = ""; }
+  $("#fsort").value = state.filter.sort;
+}
+
 function renderScan(){
+  renderToolbar();
+  const rows = filteredTop();
   const el = $("#scantbody");
   if(!state.top.length){ el.innerHTML = `<div class="empty">暂无扫描结果（等待 scan.yml 首次运行）</div>`; return; }
+  if(!rows.length){ el.innerHTML = `<div class="empty">当前筛选无结果</div>`; return; }
   let h = `<table><thead><tr><th>#</th><th>IP</th><th>POP</th><th>地区</th><th class="num">延迟</th><th class="num">得分</th><th></th></tr></thead><tbody>`;
-  state.top.forEach((r,i)=>{
+  rows.forEach((r,i)=>{
     const pct = Math.max(0,Math.min(100,(r.score/150)*100)).toFixed(0);
     h += `<tr>
       <td class="num muted">${i+1}</td>
       <td class="mono">${r.ip}</td>
       <td><span class="chip">${r.colo||"UNK"}</span></td>
       <td><span class="chip">${r.loc||"UNK"}</span></td>
-      <td class="num">${r.delay_ms} ms</td>
+      <td class="num ${delayCls(r.delay_ms)}">${r.delay_ms} ms</td>
       <td class="num">${r.score}<div class="scorebar" style="margin-top:3px"><i style="width:${pct}%"></i></div></td>
       <td><button class="copy" data-ip="${r.ip}">复制 IP</button></td>
     </tr>`;
@@ -479,18 +579,36 @@ function checkRestore(){
   }
 }
 
+/* ---------- 主题切换 ---------- */
+
+function currentTheme(){
+  const saved = localStorage.getItem(LS_THEME);
+  if(saved) return saved;
+  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+}
+function applyTheme(t){ document.documentElement.dataset.theme = t; $("#theme").textContent = t === "dark" ? "🌙 深色" : "☀️ 浅色"; }
+function toggleTheme(){
+  const next = currentTheme() === "dark" ? "light" : "dark";
+  localStorage.setItem(LS_THEME, next);
+  applyTheme(next);
+}
+
 /* ---------- 事件绑定 ---------- */
 
 $("#gen").onclick = genSingle;
 $("#genbatch").onclick = genBatch;
 $("#copy1").onclick = ()=>copy($("#vlessout").textContent);
 $("#copy2").onclick = ()=>copy($("#batchout").textContent);
+$("#copyall").onclick = ()=>copy(state.top.map(r=>r.ip).join("\n"));
 $("#transport").onchange = syncFields;
+$("#floc").onchange = ()=>{ state.filter.loc = $("#floc").value; renderScan(); };
+$("#fsort").onchange = ()=>{ state.filter.sort = $("#fsort").value; renderScan(); };
 $("#encsave").onclick = saveLocal;
 $("#encdl").onclick = downloadArchive;
 $("#encimp").onclick = importFile;
 $("#undec").onclick = restoreLocal;
 $("#unpw").onkeydown = e => { if(e.key === "Enter") restoreLocal(); };
+$("#theme").onclick = toggleTheme;
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
   document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("active"));
   b.classList.add("active");
@@ -505,9 +623,11 @@ if(!(window.crypto && crypto.subtle)){
   encMsg("当前环境不支持 Web Crypto（需 HTTPS），加密档案功能不可用", false);
 }
 
+applyTheme(currentTheme());
 syncFields();
 checkRestore();
 load();
+setInterval(load, 5*60*1000);
 </script>
 </body>
 </html>

@@ -52,6 +52,14 @@ Cloudflare Anycast IP 自动优选 + VLESS 订阅链接生成器。
 | `output/ips.txt` | 纯文本优选 IP 列表 | 同上 |
 | `output/speed.json` | 真实出口测速结果（需 self-hosted runner） | 每小时（配置后） |
 
+## 自建订阅服务（进阶，可选）
+
+不想每次手动复制订阅串？可以用一个你自己的 Cloudflare Worker 作为**私人订阅端点**：
+
+- Worker 每次被请求时实时拉取本站最新 IP 列表，用**存在 Worker 环境变量里的** UUID/SNI 实时拼接订阅——你的凭据只存在你自己的 Cloudflare 账户里
+- 订阅地址形如 `https://你的worker.workers.dev/sub?token=你的私密TOKEN`，只有知道 token 的人能拉取，泄露时改一个变量即作废旧链接
+- 客户端添加该地址为订阅后，每次「更新订阅」自动拿到**最新一轮**的优选 IP（这是静态页面做不到的）
+- 脚本与部署步骤见 [`worker/subscription-worker.js`](worker/subscription-worker.js)
 ## 免责声明
 
 本项目仅供学习研究使用，请遵守当地法律法规。使用本站生成的配置所产生的任何行为及后果，由使用者自行承担。
