@@ -1,147 +1,147 @@
 {
-  "updated_at": "2026-11-05T19:05:56Z",
+  "updated_at": "2026-11-05T19:40:54Z",
   "source": "github-actions",
   "count": 20,
   "top": [
     {
-      "ip": "188.114.96.93",
+      "ip": "104.27.12.195",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 26.8,
-      "score": 97.01
+      "delay_ms": 24.3,
+      "score": 100.92
     },
     {
-      "ip": "188.114.96.98",
+      "ip": "104.21.97.3",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 26.3,
-      "score": 96.67
+      "delay_ms": 22.0,
+      "score": 98.36
     },
     {
-      "ip": "104.24.143.55",
+      "ip": "104.27.13.20",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 29.5,
-      "score": 91.33
+      "delay_ms": 26.0,
+      "score": 96.93
     },
     {
-      "ip": "188.114.98.230",
+      "ip": "172.67.144.54",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 31.3,
-      "score": 90.55
-    },
-    {
-      "ip": "104.24.134.229",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 33.6,
-      "score": 86.23
-    },
-    {
-      "ip": "104.20.8.11",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 34.2,
-      "score": 80.4
-    },
-    {
-      "ip": "188.114.96.9",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 34.3,
-      "score": 80.06
-    },
-    {
-      "ip": "104.17.143.217",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 28.9,
-      "score": 75.79
-    },
-    {
-      "ip": "188.114.97.108",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 23.7,
-      "score": 75.18
+      "delay_ms": 29.7,
+      "score": 92.29
     },
     {
       "ip": "104.27.22.146",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 30.1,
-      "score": 74.36
+      "delay_ms": 32.3,
+      "score": 91.5
     },
     {
-      "ip": "104.27.3.119",
+      "ip": "188.114.96.9",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 30.0,
-      "score": 73.98
+      "delay_ms": 30.2,
+      "score": 90.23
     },
     {
-      "ip": "104.27.56.214",
+      "ip": "104.17.100.109",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 34.0,
-      "score": 71.35
+      "delay_ms": 30.4,
+      "score": 88.66
     },
     {
-      "ip": "104.18.164.42",
+      "ip": "104.27.127.94",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 27.8,
-      "score": 71.33
+      "delay_ms": 18.2,
+      "score": 84.34
+    },
+    {
+      "ip": "104.18.115.90",
+      "colo": "LAX",
+      "loc": "US",
+      "delay_ms": 35.4,
+      "score": 81.8
+    },
+    {
+      "ip": "188.114.97.108",
+      "colo": "LAX",
+      "loc": "US",
+      "delay_ms": 21.0,
+      "score": 81.09
+    },
+    {
+      "ip": "104.17.143.217",
+      "colo": "LAX",
+      "loc": "US",
+      "delay_ms": 34.9,
+      "score": 80.56
+    },
+    {
+      "ip": "104.27.23.225",
+      "colo": "LAX",
+      "loc": "US",
+      "delay_ms": 20.9,
+      "score": 77.45
+    },
+    {
+      "ip": "104.25.148.77",
+      "colo": "LAX",
+      "loc": "US",
+      "delay_ms": 29.7,
+      "score": 76.25
     },
     {
       "ip": "141.101.114.165",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 31.4,
-      "score": 71.29
+      "delay_ms": 27.7,
+      "score": 74.84
     },
     {
-      "ip": "104.20.14.5",
+      "ip": "104.20.55.167",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 35.0,
-      "score": 65.94
+      "delay_ms": 27.5,
+      "score": 73.65
+    },
+    {
+      "ip": "104.17.251.14",
+      "colo": "LAX",
+      "loc": "US",
+      "delay_ms": 30.8,
+      "score": 72.76
     },
     {
       "ip": "104.27.100.82",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 40.5,
-      "score": 63.79
+      "delay_ms": 30.3,
+      "score": 71.71
     },
     {
-      "ip": "104.17.86.98",
+      "ip": "104.19.18.150",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 22.6,
-      "score": 61.33
+      "delay_ms": 32.1,
+      "score": 71.65
     },
     {
-      "ip": "104.27.81.83",
+      "ip": "104.27.117.189",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 19.5,
-      "score": 61.33
+      "delay_ms": 18.1,
+      "score": 71.44
     },
     {
-      "ip": "104.27.22.89",
+      "ip": "104.27.97.82",
       "colo": "LAX",
       "loc": "US",
-      "delay_ms": 23.4,
-      "score": 60.18
-    },
-    {
-      "ip": "104.19.89.117",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 22.3,
-      "score": 58.48
+      "delay_ms": 29.4,
+      "score": 70.17
     }
   ]
 }
