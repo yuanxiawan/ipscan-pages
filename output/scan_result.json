@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-06T05:35:55Z",
+  "updated_at": "2026-11-06T06:10:52Z",
   "source": "github-actions",
   "count": 20,
   "top": [
@@ -7,141 +7,141 @@
       "ip": "140.82.113.11",
       "colo": "UNK",
       "loc": "UNK",
-      "delay_ms": 5.8,
-      "score": 124.69
+      "delay_ms": 4.4,
+      "score": 127.84
     },
     {
-      "ip": "104.27.58.73",
+      "ip": "188.114.97.94",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 12.9,
-      "score": 116.07
+      "delay_ms": 9.8,
+      "score": 118.83
     },
     {
-      "ip": "104.27.94.166",
+      "ip": "188.114.96.98",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 14.6,
-      "score": 114.98
+      "delay_ms": 13.5,
+      "score": 112.32
     },
     {
-      "ip": "104.27.117.189",
+      "ip": "141.101.121.215",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 13.8,
-      "score": 114.28
+      "delay_ms": 13.7,
+      "score": 110.67
     },
     {
-      "ip": "141.101.121.184",
+      "ip": "140.82.113.5",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 14.4,
-      "score": 113.01
-    },
-    {
-      "ip": "104.27.44.91",
-      "colo": "IAD",
-      "loc": "US",
-      "delay_ms": 14.2,
-      "score": 112.91
-    },
-    {
-      "ip": "141.101.114.165",
-      "colo": "IAD",
-      "loc": "US",
-      "delay_ms": 14.2,
-      "score": 110.23
-    },
-    {
-      "ip": "141.101.120.248",
-      "colo": "IAD",
-      "loc": "US",
-      "delay_ms": 13.4,
-      "score": 109.34
-    },
-    {
-      "ip": "104.27.84.72",
-      "colo": "IAD",
-      "loc": "US",
-      "delay_ms": 15.4,
-      "score": 107.28
+      "delay_ms": 17.2,
+      "score": 110.41
     },
     {
       "ip": "188.114.96.9",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 14.0,
-      "score": 107.22
+      "delay_ms": 13.6,
+      "score": 107.29
     },
     {
-      "ip": "104.24.134.229",
+      "ip": "188.114.97.108",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 14.5,
-      "score": 106.5
+      "delay_ms": 15.4,
+      "score": 106.4
     },
     {
-      "ip": "104.27.22.146",
+      "ip": "188.114.96.34",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 14.4,
-      "score": 105.32
+      "delay_ms": 14.9,
+      "score": 105.89
     },
     {
-      "ip": "104.27.100.82",
+      "ip": "104.27.12.195",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 15.0,
-      "score": 104.86
+      "delay_ms": 17.0,
+      "score": 105.59
     },
     {
-      "ip": "104.27.22.89",
+      "ip": "188.114.99.130",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 17.7,
-      "score": 104.55
+      "delay_ms": 13.9,
+      "score": 104.8
     },
     {
-      "ip": "188.114.98.230",
+      "ip": "104.27.76.4",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 15.3,
-      "score": 103.99
+      "delay_ms": 15.1,
+      "score": 101.66
     },
     {
-      "ip": "104.27.88.226",
+      "ip": "104.25.148.77",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 16.1,
-      "score": 101.83
+      "delay_ms": 16.3,
+      "score": 101.64
     },
     {
-      "ip": "104.24.23.35",
+      "ip": "104.27.13.20",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 15.8,
-      "score": 101.32
+      "delay_ms": 9.5,
+      "score": 99.91
     },
     {
-      "ip": "141.101.115.228",
+      "ip": "188.114.98.190",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 9.3,
-      "score": 98.27
+      "delay_ms": 9.9,
+      "score": 96.67
     },
     {
-      "ip": "104.27.23.225",
+      "ip": "104.27.3.119",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 21.6,
-      "score": 97.1
+      "delay_ms": 9.2,
+      "score": 96.09
     },
     {
-      "ip": "188.114.98.112",
+      "ip": "104.27.204.182",
       "colo": "IAD",
       "loc": "US",
-      "delay_ms": 12.0,
-      "score": 96.53
+      "delay_ms": 20.0,
+      "score": 95.36
+    },
+    {
+      "ip": "140.82.112.6",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 11.4,
+      "score": 95.16
+    },
+    {
+      "ip": "104.27.58.73",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 12.7,
+      "score": 93.38
+    },
+    {
+      "ip": "141.101.120.248",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 9.9,
+      "score": 93.09
+    },
+    {
+      "ip": "141.101.123.31",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 10.6,
+      "score": 91.07
     }
   ]
 }
