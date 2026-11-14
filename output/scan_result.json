@@ -1,147 +1,147 @@
 {
-  "updated_at": "2026-11-14T07:15:52Z",
+  "updated_at": "2026-11-14T07:50:53Z",
   "source": "github-actions",
   "count": 20,
   "top": [
     {
-      "ip": "104.27.88.226",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 17.7,
-      "score": 110.91
-    },
-    {
-      "ip": "104.27.22.146",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 18.1,
-      "score": 110.13
-    },
-    {
-      "ip": "104.27.100.82",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 17.2,
-      "score": 108.09
-    },
-    {
       "ip": "141.101.121.215",
-      "colo": "SEA",
+      "colo": "ORD",
       "loc": "US",
-      "delay_ms": 17.0,
-      "score": 105.18
+      "delay_ms": 7.1,
+      "score": 120.93
     },
     {
-      "ip": "104.17.251.14",
-      "colo": "SEA",
+      "ip": "104.27.42.252",
+      "colo": "ORD",
       "loc": "US",
-      "delay_ms": 17.5,
-      "score": 104.43
-    },
-    {
-      "ip": "141.101.115.228",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 13.2,
-      "score": 104.43
-    },
-    {
-      "ip": "188.114.96.98",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 17.9,
-      "score": 103.87
-    },
-    {
-      "ip": "104.27.3.119",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 14.1,
-      "score": 103.38
-    },
-    {
-      "ip": "104.17.101.26",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 18.0,
-      "score": 102.4
-    },
-    {
-      "ip": "104.27.117.189",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 19.8,
-      "score": 99.49
-    },
-    {
-      "ip": "104.27.56.214",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 17.3,
-      "score": 99.14
-    },
-    {
-      "ip": "104.27.84.72",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 22.1,
-      "score": 97.83
-    },
-    {
-      "ip": "104.20.8.11",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 19.3,
-      "score": 96.76
-    },
-    {
-      "ip": "188.114.97.108",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 18.7,
-      "score": 96.68
-    },
-    {
-      "ip": "104.24.58.32",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 21.0,
-      "score": 95.68
-    },
-    {
-      "ip": "104.27.81.83",
-      "colo": "SEA",
-      "loc": "US",
-      "delay_ms": 13.1,
-      "score": 95.18
+      "delay_ms": 13.6,
+      "score": 116.06
     },
     {
       "ip": "104.27.22.89",
-      "colo": "SEA",
+      "colo": "ORD",
       "loc": "US",
-      "delay_ms": 12.2,
-      "score": 95.03
+      "delay_ms": 7.5,
+      "score": 115.71
     },
     {
-      "ip": "104.18.181.166",
-      "colo": "SEA",
+      "ip": "188.114.96.98",
+      "colo": "ORD",
       "loc": "US",
-      "delay_ms": 20.5,
-      "score": 95.02
+      "delay_ms": 12.6,
+      "score": 115.14
     },
     {
-      "ip": "104.16.51.225",
-      "colo": "SEA",
+      "ip": "188.114.98.230",
+      "colo": "ORD",
       "loc": "US",
-      "delay_ms": 25.0,
-      "score": 93.62
+      "delay_ms": 14.1,
+      "score": 113.69
+    },
+    {
+      "ip": "104.27.3.119",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 13.4,
+      "score": 110.47
+    },
+    {
+      "ip": "188.114.98.112",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 12.9,
+      "score": 110.41
+    },
+    {
+      "ip": "104.27.112.18",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 9.8,
+      "score": 110.34
+    },
+    {
+      "ip": "141.101.123.31",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 13.1,
+      "score": 110.34
+    },
+    {
+      "ip": "104.27.58.73",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 13.7,
+      "score": 109.74
+    },
+    {
+      "ip": "188.114.96.34",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 14.4,
+      "score": 109.23
+    },
+    {
+      "ip": "188.114.96.42",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 13.0,
+      "score": 109.22
+    },
+    {
+      "ip": "104.27.13.20",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 12.0,
+      "score": 105.96
+    },
+    {
+      "ip": "104.27.22.146",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 14.8,
+      "score": 105.62
+    },
+    {
+      "ip": "141.101.114.165",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 20.1,
+      "score": 105.35
+    },
+    {
+      "ip": "104.27.12.195",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 15.1,
+      "score": 102.67
+    },
+    {
+      "ip": "104.27.97.82",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 16.4,
+      "score": 102.09
+    },
+    {
+      "ip": "188.114.99.130",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 9.3,
+      "score": 99.79
+    },
+    {
+      "ip": "141.101.121.184",
+      "colo": "ORD",
+      "loc": "US",
+      "delay_ms": 9.5,
+      "score": 98.61
     },
     {
       "ip": "104.27.94.166",
-      "colo": "SEA",
+      "colo": "ORD",
       "loc": "US",
-      "delay_ms": 15.1,
-      "score": 89.67
+      "delay_ms": 8.3,
+      "score": 94.76
     }
   ]
 }
