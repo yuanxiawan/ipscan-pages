@@ -1,147 +1,147 @@
 {
-  "updated_at": "2026-11-17T01:10:55Z",
+  "updated_at": "2026-11-17T01:45:56Z",
   "source": "github-actions",
   "count": 20,
   "top": [
     {
-      "ip": "141.101.121.184",
+      "ip": "141.101.114.165",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 6.0,
-      "score": 121.99
+      "delay_ms": 6.1,
+      "score": 123.24
+    },
+    {
+      "ip": "141.101.120.248",
+      "colo": "SJC",
+      "loc": "US",
+      "delay_ms": 6.5,
+      "score": 123.2
     },
     {
       "ip": "141.101.115.228",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 6.7,
-      "score": 121.87
+      "delay_ms": 7.7,
+      "score": 123.14
     },
     {
-      "ip": "188.114.98.112",
+      "ip": "104.27.81.83",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 8.6,
-      "score": 117.65
+      "delay_ms": 8.0,
+      "score": 121.25
     },
     {
-      "ip": "104.19.201.104",
+      "ip": "188.114.97.108",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 9.0,
-      "score": 112.24
+      "delay_ms": 7.3,
+      "score": 120.48
     },
     {
-      "ip": "104.24.215.249",
+      "ip": "141.101.121.215",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 11.2,
-      "score": 107.71
+      "delay_ms": 7.4,
+      "score": 119.85
     },
     {
       "ip": "104.27.76.4",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 18.1,
-      "score": 103.64
+      "delay_ms": 9.3,
+      "score": 118.72
     },
     {
-      "ip": "104.25.102.246",
+      "ip": "104.27.22.89",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 16.3,
-      "score": 101.27
+      "delay_ms": 7.2,
+      "score": 118.24
     },
     {
-      "ip": "188.114.96.9",
+      "ip": "104.27.23.225",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 22.2,
-      "score": 100.52
-    },
-    {
-      "ip": "188.114.99.130",
-      "colo": "SJC",
-      "loc": "US",
-      "delay_ms": 11.2,
-      "score": 97.56
-    },
-    {
-      "ip": "104.19.124.69",
-      "colo": "SJC",
-      "loc": "US",
-      "delay_ms": 19.4,
-      "score": 97.41
-    },
-    {
-      "ip": "104.27.12.195",
-      "colo": "SJC",
-      "loc": "US",
-      "delay_ms": 10.9,
-      "score": 95.36
+      "delay_ms": 6.4,
+      "score": 117.77
     },
     {
       "ip": "104.27.58.73",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 21.5,
-      "score": 95.33
+      "delay_ms": 9.3,
+      "score": 116.81
     },
     {
-      "ip": "104.27.22.146",
+      "ip": "188.114.98.230",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 12.4,
-      "score": 93.95
+      "delay_ms": 8.1,
+      "score": 115.45
     },
     {
-      "ip": "104.17.251.14",
+      "ip": "188.114.96.9",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 11.6,
-      "score": 93.38
-    },
-    {
-      "ip": "188.114.96.34",
-      "colo": "SJC",
-      "loc": "US",
-      "delay_ms": 9.9,
-      "score": 93.33
-    },
-    {
-      "ip": "104.27.97.82",
-      "colo": "SJC",
-      "loc": "US",
-      "delay_ms": 14.1,
-      "score": 92.36
+      "delay_ms": 7.4,
+      "score": 115.2
     },
     {
       "ip": "104.20.3.236",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 10.5,
-      "score": 91.79
+      "delay_ms": 8.0,
+      "score": 114.4
     },
     {
-      "ip": "141.101.114.165",
+      "ip": "104.27.117.189",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 13.5,
-      "score": 91.6
+      "delay_ms": 8.6,
+      "score": 114.25
+    },
+    {
+      "ip": "104.27.12.195",
+      "colo": "SJC",
+      "loc": "US",
+      "delay_ms": 9.0,
+      "score": 113.25
+    },
+    {
+      "ip": "188.114.96.42",
+      "colo": "SJC",
+      "loc": "US",
+      "delay_ms": 8.6,
+      "score": 113.07
+    },
+    {
+      "ip": "141.101.121.184",
+      "colo": "SJC",
+      "loc": "US",
+      "delay_ms": 9.0,
+      "score": 111.83
     },
     {
       "ip": "104.27.84.72",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 12.3,
-      "score": 89.69
+      "delay_ms": 14.0,
+      "score": 109.74
     },
     {
-      "ip": "104.18.164.42",
+      "ip": "104.27.100.82",
       "colo": "SJC",
       "loc": "US",
-      "delay_ms": 13.4,
-      "score": 89.29
+      "delay_ms": 11.5,
+      "score": 109.67
+    },
+    {
+      "ip": "104.24.58.32",
+      "colo": "SJC",
+      "loc": "US",
+      "delay_ms": 19.8,
+      "score": 108.94
     }
   ]
 }
