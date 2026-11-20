@@ -1,147 +1,147 @@
 {
-  "updated_at": "2026-11-20T03:51:05Z",
+  "updated_at": "2026-11-20T04:26:01Z",
   "source": "github-actions",
   "count": 20,
   "top": [
     {
-      "ip": "104.20.8.11",
+      "ip": "141.101.114.165",
       "colo": "PDX",
       "loc": "US",
-      "delay_ms": 12.8,
-      "score": 105.82
+      "delay_ms": 10.4,
+      "score": 110.78
     },
     {
-      "ip": "104.17.143.217",
+      "ip": "188.114.97.85",
       "colo": "PDX",
       "loc": "US",
-      "delay_ms": 20.1,
-      "score": 105.35
+      "delay_ms": 12.3,
+      "score": 107.76
     },
     {
-      "ip": "104.27.58.73",
+      "ip": "104.27.84.72",
       "colo": "PDX",
       "loc": "US",
-      "delay_ms": 21.0,
-      "score": 104.56
+      "delay_ms": 11.8,
+      "score": 106.32
     },
     {
-      "ip": "104.27.117.189",
+      "ip": "104.27.204.182",
       "colo": "PDX",
       "loc": "US",
-      "delay_ms": 15.4,
-      "score": 104.2
-    },
-    {
-      "ip": "104.27.23.225",
-      "colo": "PDX",
-      "loc": "US",
-      "delay_ms": 17.5,
-      "score": 102.45
-    },
-    {
-      "ip": "141.101.115.228",
-      "colo": "PDX",
-      "loc": "US",
-      "delay_ms": 15.3,
-      "score": 101.46
-    },
-    {
-      "ip": "104.27.22.146",
-      "colo": "PDX",
-      "loc": "US",
-      "delay_ms": 19.9,
-      "score": 97.97
-    },
-    {
-      "ip": "104.24.215.249",
-      "colo": "PDX",
-      "loc": "US",
-      "delay_ms": 20.2,
-      "score": 97.4
-    },
-    {
-      "ip": "172.64.67.153",
-      "colo": "PDX",
-      "loc": "US",
-      "delay_ms": 23.6,
-      "score": 96.09
-    },
-    {
-      "ip": "188.114.96.98",
-      "colo": "PDX",
-      "loc": "US",
-      "delay_ms": 12.4,
-      "score": 95.21
+      "delay_ms": 17.4,
+      "score": 106.0
     },
     {
       "ip": "104.27.81.83",
       "colo": "PDX",
       "loc": "US",
-      "delay_ms": 21.8,
-      "score": 94.25
+      "delay_ms": 18.0,
+      "score": 103.65
     },
     {
-      "ip": "104.17.194.222",
+      "ip": "104.21.97.3",
       "colo": "PDX",
       "loc": "US",
-      "delay_ms": 22.1,
-      "score": 93.92
+      "delay_ms": 22.2,
+      "score": 102.55
     },
     {
-      "ip": "104.27.22.89",
+      "ip": "141.101.121.184",
       "colo": "PDX",
       "loc": "US",
-      "delay_ms": 13.4,
-      "score": 93.69
+      "delay_ms": 18.8,
+      "score": 100.06
     },
     {
-      "ip": "104.16.132.7",
+      "ip": "104.27.56.214",
+      "colo": "PDX",
+      "loc": "US",
+      "delay_ms": 10.5,
+      "score": 97.67
+    },
+    {
+      "ip": "104.20.38.241",
+      "colo": "PDX",
+      "loc": "US",
+      "delay_ms": 11.7,
+      "score": 97.25
+    },
+    {
+      "ip": "104.24.58.32",
       "colo": "PDX",
       "loc": "US",
       "delay_ms": 22.3,
-      "score": 93.63
+      "score": 96.75
     },
     {
-      "ip": "104.16.39.143",
+      "ip": "104.18.181.166",
       "colo": "PDX",
       "loc": "US",
-      "delay_ms": 22.7,
-      "score": 93.19
+      "delay_ms": 21.5,
+      "score": 96.04
     },
     {
-      "ip": "104.18.6.112",
+      "ip": "104.18.164.42",
       "colo": "PDX",
       "loc": "US",
-      "delay_ms": 14.4,
-      "score": 91.19
+      "delay_ms": 11.6,
+      "score": 95.2
     },
     {
-      "ip": "104.25.148.77",
+      "ip": "141.101.115.228",
       "colo": "PDX",
       "loc": "US",
-      "delay_ms": 15.1,
-      "score": 90.72
+      "delay_ms": 11.8,
+      "score": 94.88
     },
     {
-      "ip": "104.19.201.104",
+      "ip": "188.114.98.112",
       "colo": "PDX",
       "loc": "US",
-      "delay_ms": 13.3,
-      "score": 90.67
+      "delay_ms": 11.4,
+      "score": 94.8
     },
     {
-      "ip": "104.27.44.91",
+      "ip": "104.27.13.20",
+      "colo": "PDX",
+      "loc": "US",
+      "delay_ms": 14.9,
+      "score": 92.71
+    },
+    {
+      "ip": "188.114.96.9",
+      "colo": "PDX",
+      "loc": "US",
+      "delay_ms": 12.7,
+      "score": 92.67
+    },
+    {
+      "ip": "188.114.97.94",
       "colo": "PDX",
       "loc": "US",
       "delay_ms": 14.8,
-      "score": 89.1
+      "score": 92.52
+    },
+    {
+      "ip": "104.27.117.189",
+      "colo": "PDX",
+      "loc": "US",
+      "delay_ms": 14.9,
+      "score": 91.91
+    },
+    {
+      "ip": "104.27.58.73",
+      "colo": "PDX",
+      "loc": "US",
+      "delay_ms": 13.6,
+      "score": 91.41
     },
     {
       "ip": "104.27.12.195",
       "colo": "PDX",
       "loc": "US",
-      "delay_ms": 16.1,
-      "score": 84.37
+      "delay_ms": 12.2,
+      "score": 90.18
     }
   ]
 }
