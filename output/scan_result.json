@@ -1,147 +1,147 @@
 {
-  "updated_at": "2026-11-20T23:40:57Z",
+  "updated_at": "2026-11-21T00:15:58Z",
   "source": "github-actions",
   "count": 20,
   "top": [
     {
-      "ip": "188.114.96.93",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 22.9,
-      "score": 96.82
+      "ip": "140.82.113.11",
+      "colo": "UNK",
+      "loc": "UNK",
+      "delay_ms": 5.3,
+      "score": 124.62
     },
     {
-      "ip": "104.27.97.82",
-      "colo": "LAX",
+      "ip": "141.101.115.228",
+      "colo": "IAD",
       "loc": "US",
-      "delay_ms": 23.9,
-      "score": 95.77
+      "delay_ms": 14.1,
+      "score": 112.07
     },
     {
-      "ip": "104.21.97.3",
-      "colo": "LAX",
+      "ip": "104.27.42.252",
+      "colo": "IAD",
       "loc": "US",
-      "delay_ms": 23.9,
-      "score": 90.01
+      "delay_ms": 12.3,
+      "score": 111.58
     },
     {
-      "ip": "188.114.96.42",
-      "colo": "LAX",
+      "ip": "104.27.3.119",
+      "colo": "IAD",
       "loc": "US",
-      "delay_ms": 28.1,
-      "score": 88.95
+      "delay_ms": 12.0,
+      "score": 111.38
     },
     {
-      "ip": "104.27.100.82",
-      "colo": "LAX",
+      "ip": "104.27.117.189",
+      "colo": "IAD",
       "loc": "US",
-      "delay_ms": 28.7,
-      "score": 88.82
+      "delay_ms": 16.5,
+      "score": 110.66
     },
     {
-      "ip": "104.27.76.4",
-      "colo": "LAX",
+      "ip": "141.101.114.165",
+      "colo": "IAD",
       "loc": "US",
-      "delay_ms": 26.2,
-      "score": 88.76
+      "delay_ms": 15.6,
+      "score": 110.58
     },
     {
       "ip": "188.114.96.34",
-      "colo": "LAX",
+      "colo": "IAD",
       "loc": "US",
-      "delay_ms": 29.8,
-      "score": 88.47
+      "delay_ms": 9.6,
+      "score": 109.64
     },
     {
-      "ip": "104.27.56.214",
-      "colo": "LAX",
+      "ip": "104.27.127.94",
+      "colo": "IAD",
       "loc": "US",
-      "delay_ms": 16.7,
-      "score": 86.53
-    },
-    {
-      "ip": "188.114.98.230",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 17.6,
-      "score": 86.46
-    },
-    {
-      "ip": "104.27.204.182",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 17.9,
-      "score": 82.35
-    },
-    {
-      "ip": "104.27.81.83",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 26.6,
-      "score": 78.92
-    },
-    {
-      "ip": "188.114.99.130",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 26.1,
-      "score": 77.86
-    },
-    {
-      "ip": "104.27.94.166",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 26.7,
-      "score": 76.8
-    },
-    {
-      "ip": "104.17.194.222",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 26.4,
-      "score": 76.77
-    },
-    {
-      "ip": "188.114.98.112",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 25.5,
-      "score": 76.76
-    },
-    {
-      "ip": "188.114.97.108",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 27.0,
-      "score": 76.2
-    },
-    {
-      "ip": "172.64.67.153",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 27.1,
-      "score": 74.81
-    },
-    {
-      "ip": "188.114.97.85",
-      "colo": "LAX",
-      "loc": "US",
-      "delay_ms": 26.8,
-      "score": 74.16
+      "delay_ms": 15.8,
+      "score": 108.13
     },
     {
       "ip": "141.101.120.248",
-      "colo": "LAX",
+      "colo": "IAD",
       "loc": "US",
-      "delay_ms": 26.3,
-      "score": 73.63
+      "delay_ms": 16.1,
+      "score": 107.36
     },
     {
-      "ip": "172.64.187.92",
-      "colo": "LAX",
+      "ip": "188.114.97.85",
+      "colo": "IAD",
       "loc": "US",
-      "delay_ms": 25.5,
-      "score": 73.43
+      "delay_ms": 17.6,
+      "score": 107.03
+    },
+    {
+      "ip": "188.114.97.94",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 16.0,
+      "score": 107.01
+    },
+    {
+      "ip": "104.19.124.69",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 17.5,
+      "score": 106.68
+    },
+    {
+      "ip": "188.114.96.98",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 14.7,
+      "score": 106.43
+    },
+    {
+      "ip": "104.27.22.146",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 15.4,
+      "score": 106.06
+    },
+    {
+      "ip": "104.27.88.226",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 18.6,
+      "score": 105.89
+    },
+    {
+      "ip": "104.27.204.182",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 14.7,
+      "score": 105.57
+    },
+    {
+      "ip": "104.27.23.225",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 15.9,
+      "score": 105.16
+    },
+    {
+      "ip": "188.114.97.108",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 14.7,
+      "score": 104.65
+    },
+    {
+      "ip": "104.27.56.214",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 14.3,
+      "score": 104.6
+    },
+    {
+      "ip": "188.114.96.42",
+      "colo": "IAD",
+      "loc": "US",
+      "delay_ms": 16.6,
+      "score": 104.47
     }
   ]
 }
