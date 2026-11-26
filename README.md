@@ -7,7 +7,7 @@ Cloudflare Anycast IP 自动优选 + VLESS 订阅链接生成器。
 
 ## 它是什么 / 不是什么
 
-- ✅ 每 30 分钟自动更新的 Cloudflare 优选 IP 列表（延迟、落地地区、POP 机场、综合评分）
+- ✅ 每 60 分钟自动更新的 Cloudflare 优选 IP 列表（延迟、落地地区、POP 机场、综合评分）
 - ✅ 浏览器端 VLESS 链接 / 批量订阅串生成器（TCP+TLS / WebSocket / gRPC / 明文 TCP）
 - ✅ AES-256-GCM 加密的本地档案（保存 / 迁移你的配置）
 - ❌ **不提供任何代理节点**——UUID、SNI 等信息必须来自你自己的服务器（如 Cloudflare Workers、自建 VLESS 服务端）。本页只负责"优选 IP"这一环。
